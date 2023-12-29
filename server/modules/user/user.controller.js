@@ -1,5 +1,6 @@
 const User = require("./user.model");
 const userCreateService = require("./userCreate.service");
+const UserLoginService = require("./userLogin.service");
 
 
 exports.registration = async (req, res) => {
@@ -28,5 +29,19 @@ exports.registration = async (req, res) => {
     }
 }
 exports.login = async (req, res) => {
-
+  try {
+    const user = await UserLoginService(req, User);
+    res.status(200).json({
+      status: "success",
+      data: user,
+    });
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      status: "fail",
+      message: "Login failed",
+      error: error.toString(),
+    });
+  }
 };
