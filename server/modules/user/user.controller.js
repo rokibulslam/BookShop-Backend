@@ -5,7 +5,7 @@ const userCreateService = require("./userCreate.service");
 exports.registration = async (req, res) => {
     try {
         const { Name, Email, Password } = req.body;
-        if (!Name || !Email || !Password) {
+        if (!Name && !Email && !Password) {
             return res.status.json({
               status: "fail",
               message: "Input field can not be empty!",
