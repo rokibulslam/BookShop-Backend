@@ -7,6 +7,7 @@ const BookSchema = mongoose.Schema(
     Author: { type: String, required: true },
     Genre: { type: String, required: true },
     PublicationDate: { type: Date, required: true },
+    reviews: { type: Number, default: 0 },
     CreatedAt: { type: Date, default: Date.now() },
   },
   { versionKey: false }
