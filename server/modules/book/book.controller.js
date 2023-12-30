@@ -91,12 +91,18 @@ exports.yearList = async (req, res) => {
       PublicationDate: { $exists: true, $ne: null },
     });
 
-    const data = distinctYears.map((date) => new Date(date).getFullYear());
+    // Use a Set to get unique years
+    const uniqueYearsSet = new Set(
+      distinctYears.map((date) => new Date(date).getFullYear())
+    );
+
+    // Convert the Set back to an array
+    const uniqueYears = Array.from(uniqueYearsSet);
 
     res.status(200).json({
       status: "success",
       message: "Book Year List Fetch successfully",
-      data: data,
+      data: uniqueYears,
     });
   } catch (error) {
     res.status(400).json({
@@ -106,6 +112,7 @@ exports.yearList = async (req, res) => {
     });
   }
 };
+
 exports.bookByGenreAndYear = async (req, res) => {
   const { genre, year } = req.params; // Assuming genre and year are passed as URL parameters
 
@@ -144,13 +151,13 @@ exports.bookListByGenre = async (req, res) => {
     const books = await bookListByGenre(req, res, Book);
     res.status(200).json({
       status: "success",
-      message: "Book List Fetch successfully",
+      message: "Book List by Genre Fetch successfully",
       data: books,
     });
   } catch (error) {
     res.status(400).json({
       status: "fail",
-      message: "Book List fetch failed",
+      message: "Book List by Genre fetch failed",
       error: error.toString(),
     });
   }
@@ -168,13 +175,13 @@ exports.bookListByYear = async (req, res) => {
     });
     res.status(200).json({
       status: "success",
-      message: "Book List Fetch successfully",
+      message: "Book List By Year Fetch successfully",
       data: data,
     });
   } catch (error) {
     res.status(400).json({
       status: "fail",
-      message: "Book List fetch failed",
+      message: "Book List By Year fetch failed",
       error: error.toString(),
     });
   }
