@@ -1,9 +1,14 @@
 const { generateToken } = require("../../Utility/jwt");
 
-const UserLoginService = async (req, DataModel) => {
-  const { Email, Password } = req.body;
+const UserLoginService = async (Request,Response, DataModel) => {
+  const { Email, Password } = Request.body;
   const user = await DataModel.findOne({ Email });
-  if (user && (await user.comparePassword(Password))) {
+  const matched = await user.comparePassword(Password)
+  
+  if (!user || !matched) {
+    throw Error("Login Failed")
+  }
+  if (user && matched) {
     const loggedUser = {
       token: generateToken(user._id),
       user: {
@@ -14,6 +19,6 @@ const UserLoginService = async (req, DataModel) => {
     };
     console.log(loggedUser);
     return loggedUser;
-  }
+  } 
 };
 module.exports = UserLoginService;

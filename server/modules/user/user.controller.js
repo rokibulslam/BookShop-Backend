@@ -30,14 +30,14 @@ exports.registration = async (req, res) => {
 }
 exports.login = async (req, res) => {
   try {
-    const user = await UserLoginService(req, User);
+    const user = await UserLoginService(req,res, User);
     res.status(200).json({
       status: "success",
+      message: "Login Success",
       data: user,
     });
-    console.log(user);
   } catch (error) {
-    console.log(error);
+    
     res.status(400).json({
       status: "fail",
       message: "Login failed",
