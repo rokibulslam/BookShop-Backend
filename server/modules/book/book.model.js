@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const BookSchema = mongoose.Schema(
   {
-    UserEmail: { type: mongoose.Schema.Types.ObjectId },
+    UserEmail: { type: String, required: true },
+    Image: { type: String, required: true },
     Title: { type: String, required: true },
     Author: { type: String, required: true },
     Genre: { type: String, required: true },
     PublicationDate: { type: Date, required: true },
-    reviews: { type: Number, default: 0 },
     CreatedAt: { type: Date, default: Date.now() },
   },
   { versionKey: false }
