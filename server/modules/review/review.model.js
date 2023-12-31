@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ReviewSchema = mongoose.Schema(
   {
-    UserEmail: { type: mongoose.Schema.Types.ObjectId },
+    UserEmail: {type:String, required:true },
     BookID:{type: mongoose.Schema.Types.ObjectId},
     Review:{type:String, required:true},
     CreatedAt: { type: Date, default: Date.now() },

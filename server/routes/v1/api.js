@@ -3,6 +3,8 @@ const router = express.Router();
 const userController = require("../../modules/user/user.controller")
 const bookController = require('../../modules/book/book.controller');
 const { protect } = require('../../middleware/authUser');
+const reviewController=require("../../modules/review/review.controller")
+
 router.post('/register', userController.registration);
 router.post('/login', userController.login);
 
@@ -21,4 +23,5 @@ router.get(
   "/booksByYear/:year",
   bookController.bookListByYear
 );
+router.get("/createReview", reviewController.createBook)
 module.exports = router;
