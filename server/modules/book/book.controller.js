@@ -1,6 +1,7 @@
 const createService = require("../../commonService/create.service");
 const updateService = require("../../commonService/updateService");
 const Book = require("./book.model");
+const bookDeleteService = require("./bookDelete.service");
 const bookDetailsByIdService = require("./bookDetailsById.service");
 const bookListByGenre = require("./bookListByGenre.service");
 
@@ -182,6 +183,22 @@ exports.bookListByYear = async (req, res) => {
     res.status(400).json({
       status: "fail",
       message: "Book List By Year fetch failed",
+      error: error.toString(),
+    });
+  }
+};
+exports.bookDelete = async (req, res) => {
+  try {
+    const data = await bookDeleteService(req, res, Book)
+    res.status(200).json({
+      status: "success",
+      message: "Book Genre List Fetch successfully",
+      data: data,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "Book Genre list fetch failed",
       error: error.toString(),
     });
   }

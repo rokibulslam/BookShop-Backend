@@ -9,7 +9,7 @@ router.post('/register', userController.registration);
 router.post('/login', userController.login);
 
 router.post('/createBook',protect, bookController.createBook);
-router.put('bookUpdate/:id',protect, bookController.updateBook);
+router.put('/bookUpdate/:id',protect, bookController.updateBook);
 router.get('/bookDetails/:id', bookController.bookDetailsById)
 router.get('/books', bookController.bookList)
 router.get('/genreList', bookController.genreList);
@@ -23,5 +23,6 @@ router.get(
   "/booksByYear/:year",
   bookController.bookListByYear
 );
-router.get("/createReview", reviewController.createBook)
+router.post("/createReview", reviewController.createBook)
+router.delete('/deleteBook/:id', bookController.bookDelete)
 module.exports = router;

@@ -9,8 +9,6 @@ const bookDetailsByIdService = async (Request, Response, DataModel) => {
     const book = await DataModel.aggregate([
         { $match: query }
     ])
-    const reviewQuery={BookID:id}
-    console.log(book);
     const reviews = await Review.find({ BookID: id });
     console.log(reviews);
     const data = {
